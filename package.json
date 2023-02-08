@@ -1,0 +1,21 @@
+{
+  "name": "film-directors",
+  "version": "1.0.0",
+  "description": "App about film directors around the world.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./src/app.js",
+    "dev": "nodemon ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Films",
+    "director",
+    "films",
+    "cinema",
+    "NodeJs",
+    "Expres"
+  ],
+  "author": "Marda",
+  "license": "ISC"
+}
