@@ -14,7 +14,8 @@ const Countries = db.define("countries", {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false, 
+    unique: true
   }
 
 }, {
