@@ -16,7 +16,9 @@ const Countries = db.define("countries", {
     type: DataTypes.STRING,
     allowNull: false
   }
-  
+
+}, {
+  timestamps: false
 });
 
 module.exports = Countries;
