@@ -5,6 +5,7 @@ const db = require("../utils/database");
 const Countries = require("./countries.models")
 
 
+
 const Directors = db.define("directors", {
 
   id: {

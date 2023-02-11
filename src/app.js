@@ -1,12 +1,26 @@
 const express = require("express");
 
-const config = require("./config");
-
-
-
 const app = express();
 
+const config = require("./config");
+
+const db = require("./utils/database");
+
+const initModels = require("./models/initModels");
+
+
+
 app.use(express.json());
+
+db.authenticate()
+  .then(() => {console.log("DB Authentication Succesfully")})
+  .catch((err) => {console.log(err)});
+
+db.sync()
+  .then(() => {console.log("DB Synced")})
+  .catch((err) => {console.log(err)}); 
+
+initModels();
 
 app.get("/", (req, res) => {
 
