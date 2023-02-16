@@ -26,7 +26,7 @@ const createCountries = async(name) => {
     name
   });
 
-  return data
+  return data;
 
 };
 
@@ -44,7 +44,7 @@ const deleteCountries = async(id) => {
 
   const data = await Countries.destroy({
     where: {id}
-  })
+  });
 
   return data;
 
