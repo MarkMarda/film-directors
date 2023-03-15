@@ -1,0 +1,370 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Film Directors",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "localhost/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "directors"
+    },
+    {
+      "name": "countries"
+    }
+  ],
+  "paths": {
+    "/directors": {
+      "get": {
+        "tags": [
+          "directors"
+        ],
+        "summary": "Returns a list of directors.",
+        "responses": {
+          "200": {
+            "description": "A JSON array of director names."
+          },
+          "400": {
+            "description": "Validation error."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "directors"
+        ],
+        "summary": "Create a new director.",
+        "requestBody": {
+          "description": "Create a director.",
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Directors"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful process."
+          },
+          "400": {
+            "description": "Missing  data / Validation error."
+          }
+        }
+      }
+    },
+    "/directors/:id": {
+      "get": {
+        "tags": [
+          "directors"
+        ],
+        "summary": "Returns a director by Id.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/directorId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Validation error."
+          },
+          "404": {
+            "description": "Id: {id} does not exists"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "directors"
+        ],
+        "summary": "Update a director with required data.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/directorId"
+          }
+        ],
+        "requestBody": {
+          "description": "Update a director with required data.",
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Directors"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Director with Id: {id} edited succesfully."
+          },
+          "400": {
+            "description": "Missing  data / Validation error."
+          },
+          "404": {
+            "description": "Invalid Id."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "directors"
+        ],
+        "summary": "Update a director by Id.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/directorId"
+          }
+        ],
+        "requestBody": {
+          "description": "Update a director.",
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Directors"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Director with Id: {id} edited succesfully."
+          },
+          "400": {
+            "description": "Validation error."
+          },
+          "404": {
+            "description": "Invalid Id."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "directors"
+        ],
+        "summary": "Delete a director.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/directorId"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Invalid Id."
+          }
+        }
+      }
+    },
+    "/countries": {
+      "get": {
+        "tags": [
+          "countries"
+        ],
+        "summary": "Returns a list of countries.",
+        "responses": {
+          "200": {
+            "description": "A JSON array of country names."
+          },
+          "400": {
+            "description": "Validation error."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "countries"
+        ],
+        "summary": "Create a new country.",
+        "requestBody": {
+          "description": "Create a country.",
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Countries"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful process."
+          },
+          "400": {
+            "description": "Invalid data / Validation error."
+          }
+        }
+      }
+    },
+    "/countries/:id": {
+      "get": {
+        "tags": [
+          "countries"
+        ],
+        "summary": "Returns a country by Id.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/countryId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "400": {
+            "description": "Validation error."
+          },
+          "404": {
+            "description": "Id: ${id} does not exists"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "countries"
+        ],
+        "summary": "Update a country by Id.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/countryId"
+          }
+        ],
+        "requestBody": {
+          "description": "Update a country.",
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Countries"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Country with Id: {id} edited succesfully."
+          },
+          "400": {
+            "description": "Validation error."
+          },
+          "404": {
+            "description": "Invalid Id."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "countries"
+        ],
+        "summary": "Delete a country by Id.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/countryId"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Invalid Id"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Directors": {
+        "required": [
+          "name",
+          "lastName",
+          "countryId",
+          "firsFilm",
+          "lastFilm"
+        ],
+        "type": "object",
+        "properties": {
+          "photograph": {
+            "type": "string",
+            "example": "www.photo.com"
+          },
+          "name": {
+            "type": "string",
+            "example": "Irvin"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Welsh"
+          },
+          "age": {
+            "type": "integer",
+            "example": 34
+          },
+          "countryId": {
+            "type": "integer"
+          },
+          "alive": {
+            "type": "boolean",
+            "example": true
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date",
+            "example": "1975-12-28T00:00:00.000Z"
+          },
+          "films": {
+            "type": "integer",
+            "example": 4
+          },
+          "firsFilm": {
+            "type": "string",
+            "example": "First Film"
+          },
+          "lastFilm": {
+            "type": "string",
+            "example": "Last Film"
+          }
+        }
+      },
+      "Countries": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Norway"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "directorId": {
+        "name": "directorId",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "UUID"
+        }
+      },
+      "countryId": {
+        "name": "countryId",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
