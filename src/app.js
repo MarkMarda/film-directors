@@ -1,6 +1,6 @@
 const express = require("express");
 
-const app = express();
+const swaggerUi = require("swagger-ui-express");
 
 const config = require("./config");
 
@@ -8,7 +8,13 @@ const db = require("./utils/database");
 
 const initModels = require("./models/initModels");
 
+const countriesRouter = require("./countries/countries.router");
+const directorsRouter = require("./directors/directors.router");
 
+const swaggerDocumentation = require("../documentation/openapi.json")
+
+
+const app = express();
 
 app.use(express.json());
 
@@ -31,11 +37,26 @@ app.get("/", (req, res) => {
   
 });
 
-app.listen(config.port, () => {
+app.use("/api/v1/directors", directorsRouter);
+app.use("/api/v1/countries", countriesRouter);
+app.use("/api/v1/doc", swaggerUi.serve, swaggerUi.setup(swaggerDocumentation));
+
+const server = app.listen(config.port, () => {
 
   console.log(`Server started at port ${config.port}`);
 
 });
 
+module.exports = {
 
+  app,
+  server
+  
+}; 
+//TODO:
+//Revisar bien el tipo de datos de los models, por ejemplo el data
+//Falta el cors, revisar si es necesario para un tipo de proyecto como este
+//agragar cortos como informacion
+//documentar app
+//test de app
 
