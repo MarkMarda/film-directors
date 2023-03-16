@@ -4,9 +4,10 @@
   "description": "App about film directors around the world.",
   "main": "app.js",
   "scripts": {
-    "start": "node ./src/app.js",
-    "dev": "nodemon ./src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "cross-env NODE_ENV=production node ./src/app.js",
+    "dev": "cross-env NODE_ENV=development nodemon ./src/app.js",
+    "test": "cross-env NODE_ENV=test jest --detectOpenHandles --silent",
+    "test:watch": "npm run test -- --watch"
   },
   "keywords": [
     "Films",
@@ -24,9 +25,13 @@
     "pg": "^8.9.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.28.0",
+    "swagger-ui-express": "^4.6.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "cross-env": "^7.0.3",
+    "jest": "^29.4.3",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.3"
   }
 }
