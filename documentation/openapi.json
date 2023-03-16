@@ -18,7 +18,7 @@
     }
   ],
   "paths": {
-    "/api/v1/directors": {
+    "/directors": {
       "get": {
         "tags": [
           "directors"
@@ -59,7 +59,7 @@
         }
       }
     },
-    "/api/v1/directors/:id": {
+    "/directors/:id": {
       "get": {
         "tags": [
           "directors"
@@ -165,7 +165,7 @@
         }
       }
     },
-    "/api/v1/countries": {
+    "/countries": {
       "get": {
         "tags": [
           "countries"
@@ -206,7 +206,7 @@
         }
       }
     },
-    "/api/v1/countries/:id": {
+    "/countries/:id": {
       "get": {
         "tags": [
           "countries"
