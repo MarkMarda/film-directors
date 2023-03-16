@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "localhost/api/v1"
+      "url": "https://film-directors.onrender.com/api/v1/doc/"
     }
   ],
   "tags": [
