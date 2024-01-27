@@ -11,7 +11,8 @@ const config = {
     username: process.env.DB_USER || "postgres",
     password: process.env.DB_PASS || "K@fk@_",
     dbName: process.env.DB_NAME
-  }
+  },
+  cloudinary: process.env.CLOUDINARY_URL
 
 };
 

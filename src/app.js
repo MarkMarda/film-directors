@@ -2,6 +2,8 @@ const express = require("express");
 
 const swaggerUi = require("swagger-ui-express");
 
+const fileUpload = require("express-fileupload");
+
 const config = require("./config");
 
 const db = require("./utils/database");
@@ -14,9 +16,17 @@ const directorsRouter = require("./directors/directors.router");
 const swaggerDocumentation = require("../documentation/openapi.json")
 
 
+
 const app = express();
 
 app.use(express.json());
+
+//Fileupload middleware
+app.use(fileUpload({
+  useTempFiles : true,
+  tempFileDir : '/tmp/',
+  createParentPath : true
+}));
 
 db.authenticate()
   .then(() => {console.log("DB Authentication Succesfully")})
@@ -32,14 +42,14 @@ app.get("/", (req, res) => {
 
   res.status(200).json({
     message: "OK!",
-    directors: `localhost: ${config.port}/api/v1/directors`
+    directors: `localhost: ${config.port}/api/v1`
   });
   
 });
 
 app.use("/api/v1/directors", directorsRouter);
 app.use("/api/v1/countries", countriesRouter);
-app.use("/api/v1/doc", swaggerUi.serve, swaggerUi.setup(swaggerDocumentation));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocumentation));
 
 const server = app.listen(config.port, () => {
 
@@ -56,7 +66,6 @@ module.exports = {
 //TODO:
 //Revisar bien el tipo de datos de los models, por ejemplo el data
 //Falta el cors, revisar si es necesario para un tipo de proyecto como este
-//agragar cortos como informacion
+//agragar cortos ademas de peliculas como informacion
 //documentar app
 //test de app
-

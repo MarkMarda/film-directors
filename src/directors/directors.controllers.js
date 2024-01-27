@@ -26,7 +26,7 @@ const createDirectors = async(data) => {
 
   const createData = await Directors.create({
     id: uuid.v4(),
-    photograph: data.photo,
+    photograph: data.photograph,
     name: data.name,
     lastName: data.lastName,
     age: data.age,
