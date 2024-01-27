@@ -13,11 +13,8 @@ const Directors = db.define("directors", {
     primaryKey: true,
     allowNull: false
   },
-  photo: {
-    type: DataTypes.STRING,
-    validate: {
-      isUrl: true
-    }
+  photograph: {
+    type: DataTypes.STRING
   },
   name: {
     type: DataTypes.STRING,
