@@ -2,6 +2,8 @@ const express = require("express");
 
 const swaggerUi = require("swagger-ui-express");
 
+const YAML = require("yamljs");
+
 const fileUpload = require("express-fileupload");
 
 const config = require("./config");
@@ -13,7 +15,7 @@ const initModels = require("./models/initModels");
 const countriesRouter = require("./countries/countries.router");
 const directorsRouter = require("./directors/directors.router");
 
-const swaggerDocumentation = require("../documentation/openapi.json")
+const swaggerDocumentation = YAML.load("documentation/openapi.yaml")
 
 
 
