@@ -2,8 +2,6 @@ const express = require("express");
 
 const swaggerUi = require("swagger-ui-express");
 
-const YAML = require("yamljs");
-
 const fileUpload = require("express-fileupload");
 
 const config = require("./config");
@@ -15,7 +13,9 @@ const initModels = require("./models/initModels");
 const countriesRouter = require("./countries/countries.router");
 const directorsRouter = require("./directors/directors.router");
 
-const swaggerDocumentation = YAML.load("documentation/openapi.yaml")
+// Problems to use version: 3.1.0 with json file, we need use 3.0.3
+const swaggerDocumentation = require("../documentation/openapi.json");
+
 
 
 

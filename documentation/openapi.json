@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.3",
   "info": {
     "title": "Film Directors",
     "version": "1.0.0"
@@ -290,43 +290,44 @@
             "format": "binary",
             "contentMediaType": ["image/png", "image/jpg", "image/jpeg"],
             "contentEncoding": "base64",
-            "examples": ["photograph.png"]
+            "example": ["photograph.png"]
           },
           "name": {
             "type": "string",
-            "examples": ["Irvin"]
+            "example": ["Irvin"]
           },
           "lastName": {
             "type": "string",
-            "examples": ["Welsh"]
+            "example": ["Welsh"]
           },
           "age": {
             "type": "integer",
-            "examples": [34]
+            "example": [34]
           },
           "countryId": {
-            "type": "integer"
+            "type": "integer",
+            "example": [3]
           },
           "alive": {
             "type": "boolean",
-            "examples": [true]
+            "example": [true]
           },
           "birthday": {
             "type": "string",
             "format": "date",
-            "examples": ["1975-12-28T00:00:00.000Z"]
+            "example": ["1975-12-28T00:00:00.000Z"]
           },
           "films": {
             "type": "integer",
-            "examples": [4]
+            "example": [4]
           },
           "firsFilm": {
             "type": "string",
-            "examples": ["First Film"]
+            "example": ["First Film"]
           },
           "lastFilm": {
             "type": "string",
-            "examples": ["Last Film"]
+            "example": ["Last Film"]
           }
         }
       },
@@ -347,43 +348,44 @@
             "format": "binary",
             "contentMediaType": ["image/png", "image/jpg", "image/jpeg"],
             "contentEncoding": "base64",
-            "examples": ["photograph.png"]
+            "example": ["photograph.png"]
           },
           "name": {
             "type": "string",
-            "examples": ["Irvin"]
+            "example": ["Irvin"]
           },
           "lastName": {
             "type": "string",
-            "examples": ["Welsh"]
+            "example": ["Welsh"]
           },
           "age": {
             "type": "integer",
-            "examples": [34]
+            "example": [34]
           },
           "countryId": {
-            "type": "integer"
+            "type": "integer",
+            "example": [3]
           },
           "alive": {
             "type": "boolean",
-            "examples": [true]
+            "example": [true]
           },
           "birthday": {
             "type": "string",
             "format": "date",
-            "examples": ["1975-12-28T00:00:00.000Z"]
+            "example": ["1975-12-28T00:00:00.000Z"]
           },
           "films": {
             "type": "integer",
-            "examples": [4]
+            "example": [4]
           },
           "firsFilm": {
             "type": "string",
-            "examples": ["First Film"]
+            "example": ["First Film"]
           },
           "lastFilm": {
             "type": "string",
-            "examples": ["Last Film"]
+            "example": ["Last Film"]
           }
         }
       },
@@ -395,43 +397,44 @@
             "format": "binary",
             "contentMediaType": ["image/png", "image/jpg", "image/jpeg"],
             "contentEncoding": "base64",
-            "examples": ["photograph.png"]
+            "example": ["photograph.png"]
           },
           "name": {
             "type": "string",
-            "examples": ["Irvin"]
+            "example": ["Irvin"]
           },
           "lastName": {
             "type": "string",
-            "examples": ["Welsh"]
+            "example": ["Welsh"]
           },
           "age": {
             "type": "integer",
-            "examples": [34]
+            "example": [34]
           },
           "countryId": {
-            "type": "integer"
+            "type": "integer",
+            "example": [8]
           },
           "alive": {
             "type": "boolean",
-            "examples": [true]
+            "example": [true]
           },
           "birthday": {
             "type": "string",
             "format": "date",
-            "examples": ["1975-12-28T00:00:00.000Z"]
+            "example": ["1975-12-28T00:00:00.000Z"]
           },
           "films": {
             "type": "integer",
-            "examples": [4]
+            "example": [4]
           },
           "firsFilm": {
             "type": "string",
-            "examples": ["First Film"]
+            "example": ["First Film"]
           },
           "lastFilm": {
             "type": "string",
-            "examples": ["Last Film"]
+            "example": ["Last Film"]
           }
         }
       },
@@ -443,7 +446,7 @@
         "properties": {
           "name": {
             "type": "string",
-            "examples": ["Norway"]
+            "example": ["Norway"]
           }
         }
       }
