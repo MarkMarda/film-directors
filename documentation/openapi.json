@@ -1,29 +1,34 @@
 {
-  "openapi": "3.0.3",
+  "openapi": "3.1.0",
   "info": {
     "title": "Film Directors",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://film-directors.onrender.com/api/v1"
+      "url": "https://film-directors.onrender.com/api/v1",
+      "description": "Production server"
+    },
+    {
+      "url": "localhost:9000/api/v1",
+      "description": "Development server"
     }
   ],
   "tags": [
     {
-      "name": "directors"
+      "name": "Directors"
     },
     {
-      "name": "countries"
+      "name": "Countries"
     }
   ],
   "paths": {
     "/directors": {
       "get": {
         "tags": [
-          "directors"
+          "Directors"
         ],
-        "summary": "Returns a list of directors.",
+        "summary": "Returns an array of directors.",
         "responses": {
           "200": {
             "description": "A JSON array of director names."
@@ -35,15 +40,15 @@
       },
       "post": {
         "tags": [
-          "directors"
+          "Directors"
         ],
         "summary": "Create a new director.",
         "requestBody": {
           "description": "Create a director.",
           "content": {
-            "aplication/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/Directors"
+                "$ref": "#/components/schemas/DirectorsPost"
               }
             }
           },
@@ -59,17 +64,21 @@
         }
       }
     },
-    "/directors/:id": {
+    "/directors/{directorId}": {
+      "parameters": [{
+        "in": "path",
+        "name": "directorId",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }],
       "get": {
         "tags": [
-          "directors"
+          "Directors"
         ],
         "summary": "Returns a director by Id.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/directorId"
-          }
-        ],
+        "operationId": "getDirectorId",
         "responses": {
           "200": {
             "description": "OK"
@@ -84,20 +93,16 @@
       },
       "put": {
         "tags": [
-          "directors"
+          "Directors"
         ],
         "summary": "Update a director with required data.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/directorId"
-          }
-        ],
+        "operationId": "putDirectorId",
         "requestBody": {
           "description": "Update a director with required data.",
           "content": {
             "aplication/json": {
               "schema": {
-                "$ref": "#/components/schemas/Directors"
+                "$ref": "#/components/schemas/DirectorsPut"
               }
             }
           },
@@ -117,20 +122,16 @@
       },
       "patch": {
         "tags": [
-          "directors"
+          "Directors"
         ],
         "summary": "Update a director by Id.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/directorId"
-          }
-        ],
+        "operationId": "patchDirectorId",
         "requestBody": {
           "description": "Update a director.",
           "content": {
-            "aplication/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/Directors"
+                "$ref": "#/components/schemas/DirectorsPatch"
               }
             }
           },
@@ -150,14 +151,10 @@
       },
       "delete": {
         "tags": [
-          "directors"
+          "Directors"
         ],
         "summary": "Delete a director.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/directorId"
-          }
-        ],
+        "operationId": "deleteDirectorId",
         "responses": {
           "404": {
             "description": "Invalid Id."
@@ -168,9 +165,9 @@
     "/countries": {
       "get": {
         "tags": [
-          "countries"
+          "Countries"
         ],
-        "summary": "Returns a list of countries.",
+        "summary": "Returns an array of countries.",
         "responses": {
           "200": {
             "description": "A JSON array of country names."
@@ -182,7 +179,7 @@
       },
       "post": {
         "tags": [
-          "countries"
+          "Countries"
         ],
         "summary": "Create a new country.",
         "requestBody": {
@@ -206,17 +203,21 @@
         }
       }
     },
-    "/countries/:id": {
+    "/countries/{countryId}": {
+      "parameters": [{
+        "in": "path",
+        "name": "countryId",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }],
       "get": {
         "tags": [
-          "countries"
+          "Countries"
         ],
         "summary": "Returns a country by Id.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/countryId"
-          }
-        ],
+        "operationId": "getCountryId",
         "responses": {
           "200": {
             "description": "OK."
@@ -231,14 +232,10 @@
       },
       "patch": {
         "tags": [
-          "countries"
+          "Countries"
         ],
         "summary": "Update a country by Id.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/countryId"
-          }
-        ],
+        "operationId": "patchCountryId",
         "requestBody": {
           "description": "Update a country.",
           "content": {
@@ -264,14 +261,10 @@
       },
       "delete": {
         "tags": [
-          "countries"
+          "Countries"
         ],
         "summary": "Delete a country by Id.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/countryId"
-          }
-        ],
+        "operationId": "deleteCountryId",
         "responses": {
           "404": {
             "description": "Invalid Id"
@@ -282,7 +275,7 @@
   },
   "components": {
     "schemas": {
-      "Directors": {
+      "DirectorsPost": {
         "required": [
           "name",
           "lastName",
@@ -294,43 +287,151 @@
         "properties": {
           "photograph": {
             "type": "string",
-            "example": "www.photo.com"
+            "format": "binary",
+            "contentMediaType": ["image/png", "image/jpg", "image/jpeg"],
+            "contentEncoding": "base64",
+            "examples": ["photograph.png"]
           },
           "name": {
             "type": "string",
-            "example": "Irvin"
+            "examples": ["Irvin"]
           },
           "lastName": {
             "type": "string",
-            "example": "Welsh"
+            "examples": ["Welsh"]
           },
           "age": {
             "type": "integer",
-            "example": 34
+            "examples": [34]
           },
           "countryId": {
             "type": "integer"
           },
           "alive": {
             "type": "boolean",
-            "example": true
+            "examples": [true]
           },
           "birthday": {
             "type": "string",
             "format": "date",
-            "example": "1975-12-28T00:00:00.000Z"
+            "examples": ["1975-12-28T00:00:00.000Z"]
           },
           "films": {
             "type": "integer",
-            "example": 4
+            "examples": [4]
           },
           "firsFilm": {
             "type": "string",
-            "example": "First Film"
+            "examples": ["First Film"]
           },
           "lastFilm": {
             "type": "string",
-            "example": "Last Film"
+            "examples": ["Last Film"]
+          }
+        }
+      },
+      "DirectorsPut": {
+        "required": [
+          "name",
+          "lastName",
+          "countryId",
+          "birthday",
+          "films",
+          "firsFilm",
+          "lastFilm"
+        ],
+        "type": "object",
+        "properties": {
+          "photograph": {
+            "type": "string",
+            "format": "binary",
+            "contentMediaType": ["image/png", "image/jpg", "image/jpeg"],
+            "contentEncoding": "base64",
+            "examples": ["photograph.png"]
+          },
+          "name": {
+            "type": "string",
+            "examples": ["Irvin"]
+          },
+          "lastName": {
+            "type": "string",
+            "examples": ["Welsh"]
+          },
+          "age": {
+            "type": "integer",
+            "examples": [34]
+          },
+          "countryId": {
+            "type": "integer"
+          },
+          "alive": {
+            "type": "boolean",
+            "examples": [true]
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date",
+            "examples": ["1975-12-28T00:00:00.000Z"]
+          },
+          "films": {
+            "type": "integer",
+            "examples": [4]
+          },
+          "firsFilm": {
+            "type": "string",
+            "examples": ["First Film"]
+          },
+          "lastFilm": {
+            "type": "string",
+            "examples": ["Last Film"]
+          }
+        }
+      },
+      "DirectorsPatch": {
+        "type": "object",
+        "properties": {
+          "photograph": {
+            "type": "string",
+            "format": "binary",
+            "contentMediaType": ["image/png", "image/jpg", "image/jpeg"],
+            "contentEncoding": "base64",
+            "examples": ["photograph.png"]
+          },
+          "name": {
+            "type": "string",
+            "examples": ["Irvin"]
+          },
+          "lastName": {
+            "type": "string",
+            "examples": ["Welsh"]
+          },
+          "age": {
+            "type": "integer",
+            "examples": [34]
+          },
+          "countryId": {
+            "type": "integer"
+          },
+          "alive": {
+            "type": "boolean",
+            "examples": [true]
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date",
+            "examples": ["1975-12-28T00:00:00.000Z"]
+          },
+          "films": {
+            "type": "integer",
+            "examples": [4]
+          },
+          "firsFilm": {
+            "type": "string",
+            "examples": ["First Film"]
+          },
+          "lastFilm": {
+            "type": "string",
+            "examples": ["Last Film"]
           }
         }
       },
@@ -342,27 +443,8 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "Norway"
+            "examples": ["Norway"]
           }
-        }
-      }
-    },
-    "parameters": {
-      "directorId": {
-        "name": "directorId",
-        "in": "query",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "format": "UUID"
-        }
-      },
-      "countryId": {
-        "name": "countryId",
-        "in": "query",
-        "required": true,
-        "schema": {
-          "type": "integer"
         }
       }
     }
