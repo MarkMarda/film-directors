@@ -9,7 +9,9 @@ const getAllCountries = (req, res) => {
       res.status(200).json(data);
     })
     .catch(err => {
-      err.status(400).json({message: err.message});
+      // To solve the error running tests use "?":
+      // TypeError: Cannot read properties of undefined (reading 'json')
+      res.status(400)?.json({message: err.message});
     });
   
 };
@@ -27,7 +29,9 @@ const getCountriesById = (req, res) => {
       }
     })
     .catch(err => {
-      err.status(400).json({message: err.message});
+      // To solve the error running tests use "?":
+      // TypeError: Cannot read properties of undefined (reading 'json')
+      res.status(400)?.json({message: err.message});
     });
   
 };
@@ -42,10 +46,10 @@ const postCountries = (req, res) => {
         res.status(201).json(data);
       })
       .catch(err => {
-        res.status(400).json({message: err.message});
+        res.status(400)?.json({message: err.message});
       });
   } else {
-    res.status(400).json({
+    res.status(400)?.json({
       message: "Invalid data",
       fields: {name: "string"}
     });
@@ -86,7 +90,7 @@ const deleteCountries = (req, res) => {
       }
     })
     .catch(err => {
-      res.status(400).json({message: err.message});
+      res.status(400)?.json({message: err.message});
     });
 
 };
