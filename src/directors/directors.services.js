@@ -96,7 +96,7 @@ const postDirectors = async (req, res) => {
     const fileExtensions = ["jpg", "jpeg", "png"];
     const fileSize = 800000
 
-    if (!fileTypes.includes(photoFile.mimetype)) {
+    if (!fileTypes.includes(photoFile?.mimetype)) {
       return res.status(400).json({message: "File types: jpg, jpeg or png"});
     };
 
@@ -347,7 +347,9 @@ const deleteDirectors = (req, res) => {
       }
     })
     .catch(err => {
-      res.status(400).json({message: err.message});
+      // To solve the error running tests use "?":
+      // TypeError: Cannot read properties of undefined (reading 'json')
+      res.status(400)?.json({message: err.message});
     });
 
 }; 
